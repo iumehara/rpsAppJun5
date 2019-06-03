@@ -1,9 +1,16 @@
 class Requests {
     play(p1, p2, observer) {
-        if (p2 === 'rock') {
-            observer.p2Wins();
-        } else {
+        if (p1 === p2) {
+            observer.tie();
+            return
+        }
+
+        if (p1 === 'rock' && p2 === 'scissors'
+            || p1 === 'scissors' && p2 === 'paper'
+            || p1 === 'paper' && p2 === 'rock') {
             observer.p1Wins();
+        } else {
+            observer.p2Wins();
         }
     }
 }
