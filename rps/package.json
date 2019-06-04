@@ -5,6 +5,9 @@
   "files": [
     "src/"
   ],
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine spec/*Spec.js"
+  },
   "devDependencies": {
     "jasmine": "latest"
   }

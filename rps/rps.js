@@ -1,5 +1,11 @@
 class Requests {
     play(p1, p2, observer) {
+        new PlayRoundRequest(p1, p2, observer).process();
+    }
+}
+
+function PlayRoundRequest(p1, p2, observer) {
+    this.process = () => {
         if (p1 === p2) {
             observer.tie();
             return
