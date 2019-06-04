@@ -15,6 +15,7 @@ function Requests() {
 function PlayRoundRequest(p1, p2, observer) {
     this.process = () => {
         if (invalid(p1) || invalid(p2)) {
+            observer.invalid();
             return
         }
 

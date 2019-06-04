@@ -80,11 +80,19 @@ describe('play specs', () => {
 
     describe("invalid scenarios", () => {
         it('null v.s. null', () => {
-            new Requests().play(null, null, {});
+            const observer = jasmine.createSpyObj('observer', ['invalid']);
+
+            new Requests().play(null, null, observer);
+
+            expect(observer.invalid).toHaveBeenCalled();
         });
 
         it('invalid v.s. invalid', () => {
-            new Requests().play('invalid', 'invalid', {});
+            const observer = jasmine.createSpyObj('observer', ['invalid']);
+
+            new Requests().play('invalid', 'invalid', observer);
+
+            expect(observer.invalid).toHaveBeenCalled();
         });
     });
 });
