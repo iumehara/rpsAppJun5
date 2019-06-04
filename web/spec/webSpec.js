@@ -13,20 +13,24 @@ describe('Play Form', function () {
     domFixture.remove()
   })
 
-  function renderApp() {
+  function renderApp(requests) {
     ReactDOM.render(
-        <PlayForm />,
+        <PlayForm requests={requests} />,
         domFixture
     )
   }
 
   it('tells the user the input is invalid', function () {
-    renderApp()
+    const playInvalidStub = {
+      play: (p1Throw, p2Throw, observer) => observer.invalid()
+    }
+    renderApp(playInvalidStub)
 
 
+    expect(domFixture.innerText).not.toContain('INVALID')
     document.querySelector('button').click()
 
 
-    expect(domFixture.innerText).toContain('INVALID')
-  });
+   expect(domFixture.innerText).toContain('INVALID')
+})
 })
