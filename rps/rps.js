@@ -6,9 +6,14 @@ class Requests {
 
 function PlayRoundRequest(p1, p2, observer) {
     this.process = () => {
+        if (['rock', 'paper', 'scissors'].includes(p1) === false
+            || ['rock', 'paper', 'scissors'].includes(p2) === false) {
+            return;
+        }
+
         if (p1 === p2) {
             observer.tie();
-            return
+            return;
         }
 
         if (p1 === 'rock' && p2 === 'scissors'
