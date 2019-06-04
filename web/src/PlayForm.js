@@ -10,6 +10,10 @@ class PlayForm extends React.Component {
         };
     }
 
+    componentDidMount() {
+        this.props.requests.history();
+    }
+
     submit() {
         this.props.requests.play(
             this.state.p1,

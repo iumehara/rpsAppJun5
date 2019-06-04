@@ -4,7 +4,7 @@ import ReactTestUtils from 'react-dom/test-utils';
 import PlayForm from '../src/PlayForm';
 
 describe('play form', () => {
-    let domFixture
+    let domFixture;
 
     beforeEach(() => {
         domFixture = document.createElement('div');
@@ -20,10 +20,15 @@ describe('play form', () => {
             document.body.appendChild(domFixture);
 
             const alwaysInvalidRequest = {
-                play: (p1, p2, observer) => observer.invalid()
+                play: (p1, p2, observer) => observer.invalid(),
+                history: () => {
+                }
             };
 
-            ReactDOM.render(<PlayForm requests={alwaysInvalidRequest} repo={{save: () => {}}}/>, domFixture);
+            ReactDOM.render(<PlayForm requests={alwaysInvalidRequest} repo={{
+                save: () => {
+                }
+            }}/>, domFixture);
             expect(domFixture.innerText).not.toContain('INVALID!');
 
             document.querySelector('button').click();
@@ -36,7 +41,13 @@ describe('play form', () => {
 
             const playSpy = jasmine.createSpy("play");
 
-            const component = <PlayForm requests={{play: playSpy}} repo={{save: () => {}}}/>;
+            const component = <PlayForm requests={{
+                play: playSpy, history: () => {
+                }
+            }} repo={{
+                save: () => {
+                }
+            }}/>;
             ReactDOM.render(component, domFixture);
 
             const p1Input = domFixture.querySelector('input[name="p1"]');
@@ -48,6 +59,17 @@ describe('play form', () => {
             document.querySelector('button').click();
 
             expect(playSpy).toHaveBeenCalledWith("rock", "scissors", jasmine.any(Object), jasmine.any(Object))
-        })
+        });
+
+
+        it("gets the history on load", () => {
+            document.body.appendChild(domFixture);
+
+            const historySpy = jasmine.createSpy("history");
+            const component = <PlayForm requests={{history: historySpy}}/>;
+            ReactDOM.render(component, domFixture);
+
+            expect(historySpy).toHaveBeenCalled()
+        });
     });
 });

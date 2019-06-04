@@ -28,7 +28,10 @@ class Round {
 function Requests() {
     this.play = (p1, p2, observer, repo) => {
         new PlayRoundRequest(p1, p2, observer, repo).process();
-    }
+    };
+
+    this.history = () => {
+    };
 }
 
 function PlayRoundRequest(p1, p2, observer, repo) {

@@ -1,7 +1,10 @@
 const {Requests, Round} = require("../rps");
 
 describe('play specs', () => {
-    const repo = {save: () => {}};
+    const repo = {
+        save: () => {},
+        history: () => {return []}
+    };
 
     describe("win scenarios", () => {
         it('rock versus scissors', () => {
