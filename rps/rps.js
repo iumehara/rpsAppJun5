@@ -31,6 +31,7 @@ function Requests() {
     };
 
     this.history = () => {
+        return []
     };
 }
 
@@ -71,4 +72,4 @@ function PlayRoundRequest(p1, p2, observer, repo) {
     }
 }
 
-module.exports = {Requests, Round, FakeResultRepo};
+module.exports = {Requests, Round, FakeResultRepo, RESULT};

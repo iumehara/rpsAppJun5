@@ -6,12 +6,14 @@ class PlayForm extends React.Component {
         this.state = {
             p1: null,
             p2: null,
-            result: null
+            result: null,
+            history: []
         };
     }
 
     componentDidMount() {
-        this.props.requests.history();
+        const history = this.props.requests.history();
+        this.setState({history: history})
     }
 
     submit() {
@@ -47,6 +49,21 @@ class PlayForm extends React.Component {
         this.setState({result: 'Player 2 Wins!'})
     }
 
+    renderHistory() {
+        if (this.state.history.length > 0) {
+            return this.state.history.map(round => {
+                return <div key={round}>
+                    <div>{round.p1}</div>
+                    <div>{round.p2}</div>
+                    <div>{round.result}</div>
+                </div>
+            })
+        }
+
+        return 'No Results';
+    }
+
+
     render() {
         return <div>
             {this.state.result ?
@@ -57,6 +74,9 @@ class PlayForm extends React.Component {
             <input name="p1" onChange={this.onP1Change.bind(this)}/>
             <input name="p2" onChange={this.onP2Change.bind(this)}/>
             <button onClick={this.submit.bind(this)}>PLAY</button>
+            <div>
+                {this.renderHistory()}
+            </div>
         </div>;
     }
 }
