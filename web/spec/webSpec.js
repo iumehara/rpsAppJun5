@@ -2,20 +2,31 @@ import ReactDOM from "react-dom";
 import React from 'react'
 import PlayForm from "../src/PlayForm";
 
-
 describe('Play Form', function () {
-  it('tells the user the input is invalid', function () {
-    const domFixutre = document.createElement('div')
-    document.querySelector('body').appendChild(domFixutre)
+  let domFixture
+  beforeEach(() => {
+    domFixture = document.createElement('div')
+    document.querySelector('body').appendChild(domFixture)
+  })
+
+  afterEach(() => {
+    domFixture.remove()
+  })
+
+  function renderApp() {
     ReactDOM.render(
         <PlayForm />,
-        domFixutre
+        domFixture
     )
+  }
+
+  it('tells the user the input is invalid', function () {
+    renderApp()
 
 
     document.querySelector('button').click()
 
 
-    expect(domFixutre.innerText).toContain('INVALID')
+    expect(domFixture.innerText).toContain('INVALID')
   });
 })
