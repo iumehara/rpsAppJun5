@@ -14,7 +14,8 @@ class PlayForm extends React.Component {
         this.props.requests.play(
             this.state.p1,
             this.state.p2,
-            this
+            this,
+            this.props.repo
         );
     }
 

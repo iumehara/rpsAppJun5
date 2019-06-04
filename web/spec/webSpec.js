@@ -23,7 +23,7 @@ describe('play form', () => {
                 play: (p1, p2, observer) => observer.invalid()
             };
 
-            ReactDOM.render(<PlayForm requests={alwaysInvalidRequest}/>, domFixture);
+            ReactDOM.render(<PlayForm requests={alwaysInvalidRequest} repo={{save: () => {}}}/>, domFixture);
             expect(domFixture.innerText).not.toContain('INVALID!');
 
             document.querySelector('button').click();
@@ -36,7 +36,7 @@ describe('play form', () => {
 
             const playSpy = jasmine.createSpy("play");
 
-            const component = <PlayForm requests={{play: playSpy}}/>;
+            const component = <PlayForm requests={{play: playSpy}} repo={{save: () => {}}}/>;
             ReactDOM.render(component, domFixture);
 
             const p1Input = domFixture.querySelector('input[name="p1"]');
@@ -47,7 +47,7 @@ describe('play form', () => {
 
             document.querySelector('button').click();
 
-            expect(playSpy).toHaveBeenCalledWith("rock", "scissors", jasmine.any(Object))
+            expect(playSpy).toHaveBeenCalledWith("rock", "scissors", jasmine.any(Object), jasmine.any(Object))
         })
     });
 });

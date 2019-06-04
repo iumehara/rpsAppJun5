@@ -4,15 +4,29 @@ const THROW = {
     SCISSORS: 'scissors'
 };
 
+const RESULT = {
+    P1WINS: 'p1wins',
+    P2WINS: 'p2wins',
+    TIE: 'tie'
+};
+
 const VALID_MOVES = [THROW.ROCK, THROW.PAPER, THROW.SCISSORS];
 
-function Requests() {
-    this.play = (p1, p2, observer) => {
-        new PlayRoundRequest(p1, p2, observer).process();
+class Round {
+    constructor(p1, p2, result) {
+        this.p1 = p1;
+        this.p2 = p2;
+        this.result = result;
     }
 }
 
-function PlayRoundRequest(p1, p2, observer) {
+function Requests() {
+    this.play = (p1, p2, observer, repo) => {
+        new PlayRoundRequest(p1, p2, observer, repo).process();
+    }
+}
+
+function PlayRoundRequest(p1, p2, observer, repo) {
     this.process = () => {
         if (invalid(p1) || invalid(p2)) {
             observer.invalid();
@@ -20,13 +34,16 @@ function PlayRoundRequest(p1, p2, observer) {
         }
 
         if (draw()) {
+            repo.save(new Round(p1, p2, RESULT.TIE));
             observer.tie();
             return
         }
 
         if (p1Wins()) {
+            repo.save(new Round(p1, p2, RESULT.P1WINS));
             observer.p1Wins()
         } else {
+            repo.save(new Round(p1, p2, RESULT.P2WINS));
             observer.p2Wins()
         }
     };
@@ -46,4 +63,4 @@ function PlayRoundRequest(p1, p2, observer) {
     }
 }
 
-module.exports = {Requests};
+module.exports = {Requests, Round};
