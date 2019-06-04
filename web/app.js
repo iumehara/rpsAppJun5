@@ -1,13 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PlayForm from "./src/PlayForm";
-import {Requests} from "../rps/rps";
+import {Requests, FakeResultRepo} from "../rps/rps";
 
 const requests = new Requests();
-const repo = {
-    save: () => {
-    }
-};
+const repo = new FakeResultRepo();
 
 class App extends React.Component {
     render() {

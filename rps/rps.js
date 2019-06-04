@@ -12,6 +12,11 @@ const RESULT = {
 
 const VALID_MOVES = [THROW.ROCK, THROW.PAPER, THROW.SCISSORS];
 
+class FakeResultRepo {
+    save() {
+    }
+}
+
 class Round {
     constructor(p1, p2, result) {
         this.p1 = p1;
@@ -63,4 +68,4 @@ function PlayRoundRequest(p1, p2, observer, repo) {
     }
 }
 
-module.exports = {Requests, Round};
+module.exports = {Requests, Round, FakeResultRepo};
