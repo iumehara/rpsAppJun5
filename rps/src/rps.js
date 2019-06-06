@@ -2,25 +2,41 @@ const THROWS = ['rock', 'paper', 'scissors'];
 
 class Request {
     play(p1, p2, observer) {
-        if (THROWS.includes(p1) === false ||
-            THROWS.includes(p2) === false) {
-            observer.invalid()
+        new PlayRequest(p1, p2, observer).process()
+    }
+}
+
+class PlayRequest {
+    constructor(p1, p2, observer) {
+        this.p1 = p1
+        this.p2 = p2
+        this.observer = observer
+    }
+
+    process() {
+        if (this.isInvalid()) {
+            this.observer.invalid()
             return
         }
 
-        if (p1 === p2) {
-            observer.tie()
+        if (this.p1 === this.p2) {
+            this.observer.tie()
             return
         }
 
-        if (p1 === 'rock' && p2 === 'scissors'
-            || p1 === 'paper' && p2 === 'rock'
-            || p1 === 'scissors' && p2 === 'paper') {
-            observer.p1Wins()
+        if (this.p1 === 'rock' && this.p2 === 'scissors'
+            || this.p1 === 'paper' && this.p2 === 'rock'
+            || this.p1 === 'scissors' && this.p2 === 'paper') {
+            this.observer.p1Wins()
             return
         }
 
-        observer.p2Wins()
+        this.observer.p2Wins()
+    }
+
+    isInvalid() {
+        return THROWS.includes(this.p1) === false ||
+            THROWS.includes(this.p2) === false
     }
 }
 

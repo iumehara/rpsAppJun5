@@ -10,7 +10,6 @@ describe('rps logic', () => {
             expect(observer.p1Wins).toHaveBeenCalled();
         });
 
-
         it('scissors vs. rock', () => {
             let observer = jasmine.createSpyObj('observer', ['p2Wins'])
 
@@ -51,7 +50,6 @@ describe('rps logic', () => {
             expect(observer.p1Wins).toHaveBeenCalled();
         });
     });
-
 
     describe('tie', () => {
         it('rock v.s. rock', () => {
