@@ -2,9 +2,9 @@ import React from 'react';
 import {RESULT} from '../../rps/rps';
 
 const MESSAGES = {
-    'p1wins': 'Player 1 Wins',
-    'p2wins': 'Player 2 Wins',
-    'tie': 'Tie'
+    [RESULT.P1WINS]: 'Player 1 Wins',
+    [RESULT.P2WINS]: 'Player 2 Wins',
+    [RESULT.TIE]: 'Tie'
 }
 
 class PlayForm extends React.Component {
