@@ -14,19 +14,17 @@ class PlayRequest {
     }
 
     process() {
-        if (this.isInvalid()) {
-            this.observer.invalid()
+        if (this.noGame()) {
+            this.observer.noGame()
             return
         }
 
-        if (this.p1 === this.p2) {
-            this.observer.tie()
+        if (this.isDraw()) {
+            this.observer.draw()
             return
         }
 
-        if (this.p1 === 'rock' && this.p2 === 'scissors'
-            || this.p1 === 'paper' && this.p2 === 'rock'
-            || this.p1 === 'scissors' && this.p2 === 'paper') {
+        if (this.p1Wins()) {
             this.observer.p1Wins()
             return
         }
@@ -34,7 +32,17 @@ class PlayRequest {
         this.observer.p2Wins()
     }
 
-    isInvalid() {
+    p1Wins() {
+        return this.p1 === 'rock' && this.p2 === 'scissors'
+            || this.p1 === 'paper' && this.p2 === 'rock'
+            || this.p1 === 'scissors' && this.p2 === 'paper'
+    }
+
+    isDraw() {
+        return this.p1 === this.p2
+    }
+
+    noGame() {
         return THROWS.includes(this.p1) === false ||
             THROWS.includes(this.p2) === false
     }

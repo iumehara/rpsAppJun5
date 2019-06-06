@@ -51,39 +51,39 @@ describe('rps logic', () => {
         });
     });
 
-    describe('tie', () => {
+    describe('draw', () => {
         it('rock v.s. rock', () => {
-            let observer = jasmine.createSpyObj('observer', ['tie'])
+            let observer = jasmine.createSpyObj('observer', ['draw'])
 
             new Request().play('rock', 'rock', observer)
 
-            expect(observer.tie).toHaveBeenCalled();
+            expect(observer.draw).toHaveBeenCalled();
         });
 
         it('scissors v.s. scissors', () => {
-            let observer = jasmine.createSpyObj('observer', ['tie'])
+            let observer = jasmine.createSpyObj('observer', ['draw'])
 
             new Request().play('scissors', 'scissors', observer)
 
-            expect(observer.tie).toHaveBeenCalled();
+            expect(observer.draw).toHaveBeenCalled();
         });
 
         it('paper v.s. paper', () => {
-            let observer = jasmine.createSpyObj('observer', ['tie'])
+            let observer = jasmine.createSpyObj('observer', ['draw'])
 
             new Request().play('paper', 'paper', observer)
 
-            expect(observer.tie).toHaveBeenCalled();
+            expect(observer.draw).toHaveBeenCalled();
         });
     });
 
     describe('invalid', () => {
-        it('invalid v.s. invalid', () => {
-            let observer = jasmine.createSpyObj('observer', ['invalid'])
+        it('invalid v.s. noGame', () => {
+            let observer = jasmine.createSpyObj('observer', ['noGame'])
 
-            new Request().play('invalid', 'invalid', observer)
+            new Request().play('rock', 'cat', observer)
 
-            expect(observer.invalid).toHaveBeenCalled();
+            expect(observer.noGame).toHaveBeenCalled();
         });
     });
 });
