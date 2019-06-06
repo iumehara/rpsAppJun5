@@ -1,4 +1,11 @@
 import React from 'react';
+import {RESULT} from '../../rps/rps';
+
+const MESSAGES = {
+    'p1wins': 'Player 1 Wins',
+    'p2wins': 'Player 2 Wins',
+    'tie': 'Tie'
+}
 
 class PlayForm extends React.Component {
     constructor(props) {
@@ -11,7 +18,7 @@ class PlayForm extends React.Component {
         };
     }
 
-    componentDidMount() {
+    history() {
         const history = this.props.requests.history();
         this.setState({history: history})
     }
@@ -55,7 +62,7 @@ class PlayForm extends React.Component {
                 return <div key={round}>
                     <div>{round.p1}</div>
                     <div>{round.p2}</div>
-                    <div>{round.result}</div>
+                    <div>{MESSAGES[round.result]}</div>
                 </div>
             })
         }
@@ -73,9 +80,12 @@ class PlayForm extends React.Component {
             }
             <input name="p1" onChange={this.onP1Change.bind(this)}/>
             <input name="p2" onChange={this.onP2Change.bind(this)}/>
-            <button onClick={this.submit.bind(this)}>PLAY</button>
+            <button name="play" onClick={this.submit.bind(this)}>PLAY</button>
             <div>
-                {this.renderHistory()}
+                <button name="history" onClick={this.history.bind(this)}>HISTORY</button>
+                <div>
+                    {this.renderHistory()}
+                </div>
             </div>
         </div>;
     }
