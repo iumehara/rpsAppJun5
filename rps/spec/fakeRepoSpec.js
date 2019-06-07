@@ -33,5 +33,17 @@ describe('fake repo', () => {
 
             expect(repo.all()).toEqual([round]);
         })
+
+        it("returns copy of rounds", () => {
+            const repo = new FakeRoundRepository();
+            const round = new Round('rock', 'paper', 'p2wins')
+
+            repo.save(round)
+
+            const result = repo.all()
+            expect(result).toEqual([round]);
+            result.push(round)
+            expect(repo.all()).toEqual([round]);
+        })
     })
 });

@@ -12,7 +12,7 @@ class FakeRoundRepository {
     }
 
     all() {
-        return this.rounds
+        return [...this.rounds]
     }
 }
 
