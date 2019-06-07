@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import PlayForm from '../src/PlayForm'
+import {Round} from 'rps'
 import ReactTestUtils from 'react-dom/test-utils'
 
 describe('Janken Game', function () {
@@ -124,6 +125,20 @@ describe('Janken Game', function () {
       domFixture.querySelector('button[name="history"]').click()
 
       expect(domFixture.innerText).toContain('No Rounds')
+    })
+
+    it("shows results when games have been played", () => {
+      const historyStub = (observer) => observer.rounds([
+          new Round('rock', 'scissors', 'p1wins')
+      ])
+      const request = { history: historyStub }
+      displayApp(request)
+
+      domFixture.querySelector('button[name="history"]').click()
+
+      expect(domFixture.innerText).toContain('rock')
+      expect(domFixture.innerText).toContain('scissors')
+      expect(domFixture.innerText).toContain('P1 Wins!')
     })
   });
 })

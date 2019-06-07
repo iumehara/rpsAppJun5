@@ -84,4 +84,4 @@ class Round {
     }
 }
 
-module.exports = {Request, Round}
+module.exports = {Request, Round, RESULT}

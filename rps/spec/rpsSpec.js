@@ -6,11 +6,11 @@ describe('rps logic', () => {
     }
 
     describe("history", () => {
-        it("sends no rounds to observer when emtpty", () => {
+        it("sends no rounds to observer when empty", () => {
             let observer = jasmine.createSpyObj('observer', ['noRounds'])
-            let repoSpy = {isEmpty: () => true}
+            let repoStub = {isEmpty: () => true}
 
-            new Request(repoSpy).history(observer)
+            new Request(repoStub).history(observer)
 
             expect(observer.noRounds).toHaveBeenCalled()
         });

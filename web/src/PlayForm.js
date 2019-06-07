@@ -1,4 +1,11 @@
 import React from 'react'
+import {RESULT} from 'rps'
+
+const MESSAGES = {
+    [RESULT.P1WINS]: 'P1 Wins!',
+    [RESULT.P2WINS]: 'P2 Wins!',
+    [RESULT.DRAW]: 'Draw'
+}
 
 export default class PlayForm extends React.Component {
     constructor(props) {
@@ -29,6 +36,10 @@ export default class PlayForm extends React.Component {
         this.setState({rounds: []})
     }
 
+    rounds(rounds) {
+        this.setState({rounds: rounds})
+    }
+
     inputChanged(event) {
         this.setState({[event.target.name]: event.target.value})
     }
@@ -41,12 +52,35 @@ export default class PlayForm extends React.Component {
     }
 
     historyButtonClicked() {
-        this.props.request.history(this)
+        const observer = this
+        this.props.request.history(observer)
     }
 
     displayRounds() {
-        if (this.state.rounds == null) {
+        const rounds = this.state.rounds
+        if (rounds == null) {
             return null
+        }
+
+        if (rounds.length > 0) {
+            return <table>
+                <thead>
+                <tr>
+                    <th>P1</th>
+                    <th>P2</th>
+                    <th>Result</th>
+                </tr>
+                </thead>
+                <body>
+                {rounds.map(round =>
+                    <tr>
+                        <td>{round.p1}</td>
+                        <td>{round.p2}</td>
+                        <td>{MESSAGES[round.result]}</td>
+                    </tr>
+                )}
+                </body>
+            </table>
         }
 
         return <p>No Rounds</p>
@@ -64,13 +98,13 @@ export default class PlayForm extends React.Component {
                 <div>
                     <div>P2</div>
                     <input name='p2Hand'
-                        onChange={this.inputChanged.bind(this)}/>
+                           onChange={this.inputChanged.bind(this)}/>
                 </div>
                 <button name="play" onClick={this.playButtonClicked.bind(this)}>Play</button>
                 <div>{this.state.result}</div>
                 <h2>History</h2>
-                <button name="history" onClick={this.historyButtonClicked.bind(this)}>History</button>
-                { this.displayRounds() }
+                <button name="history" onClick={this.historyButtonClicked.bind(this)}>Get History</button>
+                {this.displayRounds()}
             </div>
         )
     }
