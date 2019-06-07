@@ -71,15 +71,15 @@ export default class PlayForm extends React.Component {
                     <th>Result</th>
                 </tr>
                 </thead>
-                <body>
+                <tbody>
                 {rounds.map(round =>
-                    <tr>
+                    <tr key={round}>
                         <td>{round.p1}</td>
                         <td>{round.p2}</td>
                         <td>{MESSAGES[round.result]}</td>
                     </tr>
                 )}
-                </body>
+                </tbody>
             </table>
         }
 
