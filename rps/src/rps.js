@@ -1,3 +1,5 @@
+const FakeRoundRepository  = require('./FakeRoundRepository')
+
 const THROW = {
     ROCK: 'rock',
     PAPER: 'paper',
@@ -87,4 +89,4 @@ class Round {
     }
 }
 
-module.exports = {Request, Round, RESULT, THROW}
+module.exports = {Request, Round, RESULT, THROW, FakeRoundRepository}
