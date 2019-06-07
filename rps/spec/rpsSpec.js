@@ -10,7 +10,7 @@ describe('rps logic', () => {
             let observer = {p1Wins: () => {}}
             let repoSpy = jasmine.createSpyObj('repo', ['save'])
 
-            new Request().play('rock', 'scissors', observer, repoSpy)
+            new Request(repoSpy).play('rock', 'scissors', observer)
 
             expect(repoSpy.save).toHaveBeenCalledWith(new Round('rock', 'scissors', 'p1wins'))
         });
@@ -19,7 +19,7 @@ describe('rps logic', () => {
             let observer = {p2Wins: () => {}}
             let repoSpy = jasmine.createSpyObj('repo', ['save'])
 
-            new Request().play('scissors', 'rock', observer, repoSpy)
+            new Request(repoSpy).play('scissors', 'rock', observer)
 
             expect(repoSpy.save).toHaveBeenCalledWith(new Round('scissors', 'rock', 'p2wins'))
         });
@@ -28,7 +28,7 @@ describe('rps logic', () => {
             let observer = {draw: () => {}}
             let repoSpy = jasmine.createSpyObj('repo', ['save'])
 
-            new Request().play('rock', 'rock', observer, repoSpy)
+            new Request(repoSpy).play('rock', 'rock', observer)
 
             expect(repoSpy.save).toHaveBeenCalledWith(new Round('rock', 'rock', 'draw'))
         });
@@ -37,7 +37,7 @@ describe('rps logic', () => {
             let observer = {noGame: () => {}}
             let repoSpy = jasmine.createSpyObj('repo', ['save'])
 
-            new Request().play('sailboat', 'rock', observer, repoSpy)
+            new Request(repoSpy).play('sailboat', 'rock', observer)
 
             expect(repoSpy.save).toHaveBeenCalledWith(new Round('sailboat', 'rock', 'noGame'))
         });
@@ -47,7 +47,7 @@ describe('rps logic', () => {
         it('rock vs. scissors', () => {
             let observer = jasmine.createSpyObj('observer', ['p1Wins'])
 
-            new Request().play('rock', 'scissors', observer, emptyRepo)
+            new Request(emptyRepo).play('rock', 'scissors', observer)
 
             expect(observer.p1Wins).toHaveBeenCalled();
         });
@@ -55,7 +55,7 @@ describe('rps logic', () => {
         it('scissors vs. rock', () => {
             let observer = jasmine.createSpyObj('observer', ['p2Wins'])
 
-            new Request().play('scissors', 'rock', observer, emptyRepo)
+            new Request(emptyRepo).play('scissors', 'rock', observer)
 
             expect(observer.p2Wins).toHaveBeenCalled();
         });
@@ -63,7 +63,7 @@ describe('rps logic', () => {
         it('rock vs. paper', () => {
             let observer = jasmine.createSpyObj('observer', ['p2Wins'])
 
-            new Request().play('rock', 'paper', observer, emptyRepo)
+            new Request(emptyRepo).play('rock', 'paper', observer)
 
             expect(observer.p2Wins).toHaveBeenCalled();
         });
@@ -71,7 +71,7 @@ describe('rps logic', () => {
         it('paper vs. rock', () => {
             let observer = jasmine.createSpyObj('observer', ['p1Wins'])
 
-            new Request().play('paper', 'rock', observer, emptyRepo)
+            new Request(emptyRepo).play('paper', 'rock', observer)
 
             expect(observer.p1Wins).toHaveBeenCalled();
         });
@@ -79,7 +79,7 @@ describe('rps logic', () => {
         it('paper vs. scissors', () => {
             let observer = jasmine.createSpyObj('observer', ['p2Wins'])
 
-            new Request().play('paper', 'scissors', observer, emptyRepo)
+            new Request(emptyRepo).play('paper', 'scissors', observer)
 
             expect(observer.p2Wins).toHaveBeenCalled();
         });
@@ -87,7 +87,7 @@ describe('rps logic', () => {
         it('scissors vs. paper', () => {
             let observer = jasmine.createSpyObj('observer', ['p1Wins'])
 
-            new Request().play('scissors', 'paper', observer, emptyRepo)
+            new Request(emptyRepo).play('scissors', 'paper', observer)
 
             expect(observer.p1Wins).toHaveBeenCalled();
         });
@@ -97,7 +97,7 @@ describe('rps logic', () => {
         it('rock v.s. rock', () => {
             let observer = jasmine.createSpyObj('observer', ['draw'])
 
-            new Request().play('rock', 'rock', observer, emptyRepo)
+            new Request(emptyRepo).play('rock', 'rock', observer)
 
             expect(observer.draw).toHaveBeenCalled();
         });
@@ -105,7 +105,7 @@ describe('rps logic', () => {
         it('scissors v.s. scissors', () => {
             let observer = jasmine.createSpyObj('observer', ['draw'])
 
-            new Request().play('scissors', 'scissors', observer, emptyRepo)
+            new Request(emptyRepo).play('scissors', 'scissors', observer)
 
             expect(observer.draw).toHaveBeenCalled();
         });
@@ -113,7 +113,7 @@ describe('rps logic', () => {
         it('paper v.s. paper', () => {
             let observer = jasmine.createSpyObj('observer', ['draw'])
 
-            new Request().play('paper', 'paper', observer, emptyRepo)
+            new Request(emptyRepo).play('paper', 'paper', observer)
 
             expect(observer.draw).toHaveBeenCalled();
         });
@@ -123,7 +123,7 @@ describe('rps logic', () => {
         it('invalid v.s. noGame', () => {
             let observer = jasmine.createSpyObj('observer', ['noGame'])
 
-            new Request().play('rock', 'cat', observer, emptyRepo)
+            new Request(emptyRepo).play('rock', 'cat', observer)
 
             expect(observer.noGame).toHaveBeenCalled();
         });

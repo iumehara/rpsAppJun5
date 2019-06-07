@@ -41,7 +41,7 @@ describe('Janken Game', function () {
     })
     it('with play button', function () {
       displayApp()
-      expect(domFixture.querySelector('button').innerText).toContain('Play')
+      expect(domFixture.querySelector('button[name="play"]').innerText).toContain('Play')
     })
   })
 
@@ -52,7 +52,7 @@ describe('Janken Game', function () {
       displayApp(request)
 
       expect(domFixture.innerText).not.toContain('P1 Wins!')
-      domFixture.querySelector('button').click()
+      domFixture.querySelector('button[name="play"]').click()
 
       expect(domFixture.innerText).toContain('P1 Wins!')
     })
@@ -63,7 +63,7 @@ describe('Janken Game', function () {
       displayApp(request)
 
       expect(domFixture.innerText).not.toContain('P2 Wins!')
-      domFixture.querySelector('button').click()
+      domFixture.querySelector('button[name="play"]').click()
 
       expect(domFixture.innerText).toContain('P2 Wins!')
     })
@@ -74,7 +74,7 @@ describe('Janken Game', function () {
       displayApp(request)
 
       expect(domFixture.innerText).not.toContain('Draw')
-      domFixture.querySelector('button').click()
+      domFixture.querySelector('button[name="play"]').click()
 
       expect(domFixture.innerText).toContain('Draw')
     })
@@ -85,7 +85,7 @@ describe('Janken Game', function () {
       displayApp(request)
 
       expect(domFixture.innerText).not.toContain('No Game')
-      domFixture.querySelector('button').click()
+      domFixture.querySelector('button[name="play"]').click()
 
       expect(domFixture.innerText).toContain('No Game')
     })
@@ -100,7 +100,7 @@ describe('Janken Game', function () {
       setInputValue('p1Hand', 'rock')
       setInputValue('p2Hand', 'scissors')
 
-      domFixture.querySelector('button').click()
+      domFixture.querySelector('button[name="play"]').click()
 
 
       expect(playSpy).toHaveBeenCalled()
@@ -108,4 +108,15 @@ describe('Janken Game', function () {
           .toHaveBeenCalledWith('rock', 'scissors', jasmine.any(Object))
     })
   })
+
+  describe("history", () => {
+    it("shows no results when no games have been played", () => {
+      const request = {history: () => []}
+      displayApp(request)
+
+      domFixture.querySelector('button[name="history"]').click()
+
+      expect(domFixture.innerText).toContain('No Rounds')
+    })
+  });
 })

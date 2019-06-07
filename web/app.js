@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom'
 import PlayForm from './src/PlayForm'
 import {Request} from 'rps'
 
-const request = new Request()
+const repoStub = {
+  save: () => {}
+}
+const request = new Request(repoStub)
 
 class App extends React.Component {
   render(){

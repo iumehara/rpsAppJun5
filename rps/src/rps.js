@@ -14,8 +14,15 @@ const RESULT = {
 }
 
 class Request {
-    play(p1, p2, observer, repo) {
-        new PlayRequest(p1, p2, observer, repo).process()
+    constructor(repo) {
+        this.repo = repo
+    }
+
+    play(p1, p2, observer) {
+        new PlayRequest(p1, p2, observer, this.repo).process()
+    }
+
+    history(observer) {
     }
 }
 

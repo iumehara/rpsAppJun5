@@ -1,14 +1,11 @@
 import React from 'react'
 
-const stubRepo = {
-    save: () => {}
-}
-
 export default class PlayForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            result: 'have not played yet :('
+            result: 'have not played yet :(',
+            rounds: []
         }
     }
 
@@ -28,6 +25,10 @@ export default class PlayForm extends React.Component {
         this.setState({result: 'Draw'})
     }
 
+    history(rounds) {
+        this.setState({rounds: []})
+    }
+
     inputChanged(event) {
         this.setState({[event.target.name]: event.target.value})
     }
@@ -36,7 +37,11 @@ export default class PlayForm extends React.Component {
         const p1Hand = this.state.p1Hand
         const p2Hand = this.state.p2Hand
         const observer = this
-        this.props.request.play(p1Hand, p2Hand, observer, stubRepo)
+        this.props.request.play(p1Hand, p2Hand, observer)
+    }
+
+    historyButtonClicked() {
+        this.props.request.history(this)
     }
 
     render() {
@@ -53,8 +58,14 @@ export default class PlayForm extends React.Component {
                     <input name='p2Hand'
                         onChange={this.inputChanged.bind(this)}/>
                 </div>
-                <button onClick={this.playButtonClicked.bind(this)}>Play</button>
+                <button name="play" onClick={this.playButtonClicked.bind(this)}>Play</button>
                 <div>{this.state.result}</div>
+                <h2>History</h2>
+                <button name="history" onClick={this.historyButtonClicked.bind(this)}>History</button>
+                { this.state.rounds.length > 0 ?
+                    null
+                    : <p>No Rounds</p>
+                }
             </div>
         )
     }
