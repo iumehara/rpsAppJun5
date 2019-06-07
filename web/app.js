@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom'
 import PlayForm from './src/PlayForm'
 import {Request} from 'rps'
 
-const repoStub = {
-  save: () => {}
+const emptyRepo = {
+  save: () => {},
+  isEmpty: () => true
 }
-const request = new Request(repoStub)
+const request = new Request(emptyRepo)
 
 class App extends React.Component {
   render(){

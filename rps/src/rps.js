@@ -23,6 +23,9 @@ class Request {
     }
 
     history(observer) {
+        if (this.repo.isEmpty()) {
+            observer.noRounds()
+        }
     }
 }
 

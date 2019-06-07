@@ -5,6 +5,17 @@ describe('rps logic', () => {
         save: () => {}
     }
 
+    describe("history", () => {
+        it("sends no rounds to observer when emtpty", () => {
+            let observer = jasmine.createSpyObj('observer', ['noRounds'])
+            let repoSpy = {isEmpty: () => true}
+
+            new Request(repoSpy).history(observer)
+
+            expect(observer.noRounds).toHaveBeenCalled()
+        });
+    });
+
     describe("saving", () => {
         it("saves a round when p1 wins", () => {
             let observer = {p1Wins: () => {}}

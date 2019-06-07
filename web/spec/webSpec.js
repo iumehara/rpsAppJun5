@@ -110,8 +110,15 @@ describe('Janken Game', function () {
   })
 
   describe("history", () => {
+    it("shows nothing before history is clicked", () => {
+      displayApp({})
+
+      expect(domFixture.innerText).not.toContain('No Rounds')
+    })
+
     it("shows no results when no games have been played", () => {
-      const request = {history: () => []}
+      const historyStub = (observer) => observer.noRounds()
+      const request = { history: historyStub }
       displayApp(request)
 
       domFixture.querySelector('button[name="history"]').click()

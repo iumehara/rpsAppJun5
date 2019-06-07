@@ -5,7 +5,7 @@ export default class PlayForm extends React.Component {
         super(props)
         this.state = {
             result: 'have not played yet :(',
-            rounds: []
+            rounds: null
         }
     }
 
@@ -25,7 +25,7 @@ export default class PlayForm extends React.Component {
         this.setState({result: 'Draw'})
     }
 
-    history(rounds) {
+    noRounds() {
         this.setState({rounds: []})
     }
 
@@ -42,6 +42,14 @@ export default class PlayForm extends React.Component {
 
     historyButtonClicked() {
         this.props.request.history(this)
+    }
+
+    displayRounds() {
+        if (this.state.rounds == null) {
+            return null
+        }
+
+        return <p>No Rounds</p>
     }
 
     render() {
@@ -62,10 +70,7 @@ export default class PlayForm extends React.Component {
                 <div>{this.state.result}</div>
                 <h2>History</h2>
                 <button name="history" onClick={this.historyButtonClicked.bind(this)}>History</button>
-                { this.state.rounds.length > 0 ?
-                    null
-                    : <p>No Rounds</p>
-                }
+                { this.displayRounds() }
             </div>
         )
     }
