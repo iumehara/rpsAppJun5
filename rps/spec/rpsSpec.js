@@ -14,6 +14,16 @@ describe('rps logic', () => {
 
             expect(observer.noRounds).toHaveBeenCalled()
         });
+
+        it("sends rounds to observer when not empty", () => {
+            let observer = jasmine.createSpyObj('observer', ['rounds'])
+            let rounds = [new Round('rock', 'paper', 'p2wins')]
+            let repoStub = {isEmpty: () => false, all: () => rounds}
+
+            new Request(repoStub).history(observer)
+
+            expect(observer.rounds).toHaveBeenCalledWith(rounds)
+        });
     });
 
     describe("saving", () => {

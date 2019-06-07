@@ -1,5 +1,11 @@
 import React from 'react'
-import {RESULT} from 'rps'
+import {RESULT, THROW} from 'rps'
+
+const THROWS = {
+    [THROW.ROCK]: "Rock",
+    [THROW.PAPER]: "Paper",
+    [THROW.SCISSORS]: "Scissors",
+}
 
 const MESSAGES = {
     [RESULT.P1WINS]: 'P1 Wins!',
@@ -37,7 +43,7 @@ export default class PlayForm extends React.Component {
     }
 
     rounds(rounds) {
-        this.setState({rounds: rounds})
+        this.setState({rounds})
     }
 
     inputChanged(event) {
@@ -74,8 +80,8 @@ export default class PlayForm extends React.Component {
                 <tbody>
                 {rounds.map(round =>
                     <tr key={round}>
-                        <td>{round.p1}</td>
-                        <td>{round.p2}</td>
+                        <td>{THROWS[round.p1]}</td>
+                        <td>{THROWS[round.p2]}</td>
                         <td>{MESSAGES[round.result]}</td>
                     </tr>
                 )}

@@ -1,14 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PlayForm from './src/PlayForm'
-import {Request} from 'rps'
+import {Request, Round} from 'rps'
 
 const emptyRepo = {
-    save: () => {
-    },
-    isEmpty: () => true
+    save: () => {},
+    isEmpty: () => true,
+    all: () => []
 }
-const request = new Request(emptyRepo)
+
+const stubRepo = {
+    save: () => {},
+    isEmpty: () => false,
+    all: () => [new Round('rock', 'paper', 'p2wins')]
+}
+
+const request = new Request(stubRepo)
 
 class App extends React.Component {
     render() {

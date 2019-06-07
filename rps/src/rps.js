@@ -25,7 +25,10 @@ class Request {
     history(observer) {
         if (this.repo.isEmpty()) {
             observer.noRounds()
+            return
         }
+
+        observer.rounds(this.repo.all())
     }
 }
 
@@ -84,4 +87,4 @@ class Round {
     }
 }
 
-module.exports = {Request, Round, RESULT}
+module.exports = {Request, Round, RESULT, THROW}

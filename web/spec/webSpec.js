@@ -136,8 +136,8 @@ describe('Janken Game', function () {
 
       domFixture.querySelector('button[name="history"]').click()
 
-      expect(domFixture.innerText).toContain('rock')
-      expect(domFixture.innerText).toContain('scissors')
+      expect(domFixture.innerText).toContain('Rock')
+      expect(domFixture.innerText).toContain('Scissors')
       expect(domFixture.innerText).toContain('P1 Wins!')
     })
   });
