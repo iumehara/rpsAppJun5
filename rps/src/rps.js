@@ -10,6 +10,7 @@ const RESULT = {
     P1WINS: 'p1wins',
     P2WINS: 'p2wins',
     DRAW: 'draw',
+    NOGAME: 'noGame'
 }
 
 class Request {
@@ -28,6 +29,7 @@ class PlayRequest {
 
     process() {
         if (this.noGame()) {
+            this.repo.save(new Round(this.p1, this.p2, RESULT.NOGAME))
             this.observer.noGame()
             return
         }

@@ -32,6 +32,15 @@ describe('rps logic', () => {
 
             expect(repoSpy.save).toHaveBeenCalledWith(new Round('rock', 'rock', 'draw'))
         });
+
+        it("saves a round when no game wins", () => {
+            let observer = {noGame: () => {}}
+            let repoSpy = jasmine.createSpyObj('repo', ['save'])
+
+            new Request().play('sailboat', 'rock', observer, repoSpy)
+
+            expect(repoSpy.save).toHaveBeenCalledWith(new Round('sailboat', 'rock', 'noGame'))
+        });
     });
 
     describe('win', () => {
