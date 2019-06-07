@@ -1,5 +1,9 @@
 import React from 'react'
 
+const stubRepo = {
+    save: () => {}
+}
+
 export default class PlayForm extends React.Component {
     constructor(props) {
         super(props)
@@ -32,7 +36,7 @@ export default class PlayForm extends React.Component {
         const p1Hand = this.state.p1Hand
         const p2Hand = this.state.p2Hand
         const observer = this
-        this.props.request.play(p1Hand, p2Hand, observer)
+        this.props.request.play(p1Hand, p2Hand, observer, stubRepo)
     }
 
     render() {
