@@ -91,8 +91,6 @@ describe('Janken Game', function () {
     })
   })
 
-
-
   describe('プレー内容でRequestを呼ぶ', () => {
     it('sends p1 input and p2 input to play', () => {
       const playSpy = jasmine.createSpy('play')

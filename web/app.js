@@ -1,11 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import PlayForm from './src/PlayForm'
+import {Request} from 'rps'
+
+const request = new Request()
 
 class App extends React.Component {
   render(){
     return (
       <div>
-        <h1>Rps App</h1>
+        <PlayForm request={request}/>
       </div>
     )
   }

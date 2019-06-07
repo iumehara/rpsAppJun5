@@ -24,14 +24,6 @@ export default class PlayForm extends React.Component {
         this.setState({result: 'Draw'})
     }
 
-    // p1Changed(event) {
-    //     this.setState({p1Hand: event.target.value})
-    // }
-    //
-    // p2Changed(event) {
-    //     this.setState({p2Hand: event.target.value})
-    // }
-
     inputChanged(event) {
         this.setState({[event.target.name]: event.target.value})
     }
