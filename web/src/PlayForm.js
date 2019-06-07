@@ -8,10 +8,6 @@ export default class PlayForm extends React.Component {
         }
     }
 
-    playButtonClicked() {
-        this.props.request.play(null, null, this)
-    }
-
     p1Wins() {
         this.setState({result: 'P1 Wins!'})
     }
@@ -28,15 +24,38 @@ export default class PlayForm extends React.Component {
         this.setState({result: 'Draw'})
     }
 
+    // p1Changed(event) {
+    //     this.setState({p1Hand: event.target.value})
+    // }
+    //
+    // p2Changed(event) {
+    //     this.setState({p2Hand: event.target.value})
+    // }
+
+    inputChanged(event) {
+        this.setState({[event.target.name]: event.target.value})
+    }
+
+    playButtonClicked() {
+        const p1Hand = this.state.p1Hand
+        const p2Hand = this.state.p2Hand
+        const observer = this
+        this.props.request.play(p1Hand, p2Hand, observer)
+    }
+
     render() {
         return (
             <div>
                 <div>Janken Game</div>
                 <div>
                     <div>P1</div>
+                    <input name='p1Hand'
+                           onChange={this.inputChanged.bind(this)}/>
                 </div>
                 <div>
                     <div>P2</div>
+                    <input name='p2Hand'
+                        onChange={this.inputChanged.bind(this)}/>
                 </div>
                 <button onClick={this.playButtonClicked.bind(this)}>Play</button>
                 <div>{this.state.result}</div>

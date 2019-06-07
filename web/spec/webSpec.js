@@ -1,12 +1,20 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import PlayForm from '../src/PlayForm'
+import ReactTestUtils from 'react-dom/test-utils'
 
 describe('Janken Game', function () {
   let domFixture
 
   function displayApp(request) {
     ReactDOM.render(<PlayForm request={request}/>, domFixture)
+  }
+
+  function setInputValue(name, value) {
+    const p1Input = document
+        .querySelector(`input[name="${name}"]`)
+    p1Input.value = value
+    ReactTestUtils.Simulate.change(p1Input)
   }
 
   beforeEach(() => {
@@ -83,7 +91,23 @@ describe('Janken Game', function () {
     })
   })
 
-  describe('プレー内容でRequestを呼ぶ', () =>{
 
+
+  describe('プレー内容でRequestを呼ぶ', () => {
+    it('sends p1 input and p2 input to play', () => {
+      const playSpy = jasmine.createSpy('play')
+      const request = {play: playSpy}
+      displayApp(request)
+
+      setInputValue('p1Hand', 'rock')
+      setInputValue('p2Hand', 'scissors')
+
+      domFixture.querySelector('button').click()
+
+
+      expect(playSpy).toHaveBeenCalled()
+      expect(playSpy)
+          .toHaveBeenCalledWith('rock', 'scissors', jasmine.any(Object))
+    })
   })
 })
